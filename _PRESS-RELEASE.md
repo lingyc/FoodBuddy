@@ -18,27 +18,45 @@ Once the project moves into development, the press release can be used as a touc
  
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
+  
+  foodBuddy
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  
+  The product is for anyone who buys groceries, the app tells them which supermarket has the best price for their food.
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+	
+	foodBuddy lets users upload prices from supermarkey as they shop for groceries (we offer incentive for users to do that), which provide other users with the pricing information on the grocery lists they saved on the application. The application will recommend which supermarket to go to base on the pricing information in the database.
 
 ## Problem ##
   > Describe the problem your product solves.
+  
+  Realtime grocery pricing information is very limited, and often consider a trade secret. Consumer usually don't have the information to make a judgement to which store they should choose to shop at.
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
+  
+  The app allow grocery price data to be provided by the user, instead of directly from the different supermarkets.
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
+  
+  This application will allow for smarter consumer.
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
+  
+  All you need is to go on to the application, you will immediately see a list of all grocery items and their prices that you can filter through. If you signup an account, you can create your grocery lists that you can view to see which store offer the best price.
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  
+  This app help me save a lot of food money!
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
+  
+  Come and use foodBuddy today.

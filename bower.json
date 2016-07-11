@@ -1,0 +1,17 @@
+{
+  "name": "foodbuddy",
+  "description": "MVP project",
+  "main": "server.js",
+  "authors": [
+    "Ling Yu Chen"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/lingyc/2016-06-mvp",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

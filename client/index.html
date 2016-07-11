@@ -1,15 +1,27 @@
 <!DOCTYPE html>
-<html>
-  <head ng-app="foodBuddy">
+<html ng-app="foodBuddy">
+  <head>
     <meta charset="utf-8" />
+    <script src="/lib/angular/angular.min.js"></script>
+    <script src="/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/app/app.js"></script>
+    <script src="/app/services/services.js"></script>
+    <script src="/app/report/report.js"></script>
     <title>foodBuddy</title>
   </head>
+
   <body>
     <h1>foodBuddy</h1>
+
+    <div class='navigation'>
+      <ul>
+        <li><a href='#/public' class='index'>Public Lists</a></li>
+        <li><a href='#/lists' class='create'>Your Lists</a></li>
+        <li><a href='#/report' class='report'>Report Prices</a></li>
+      </ul>
+    </div>
+
+    <div ui-view></div>
   </body>
 
-  <script type="/lib/angular/angular.min.js"></script>
-  <script type="/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
-  <script type="/app/app.js"></script>
-  <script type="/app//services/services.js"></script>
 </html>

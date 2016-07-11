@@ -1,7 +1,8 @@
 angular.module('foodBuddy.services', [])
 
 .factory('Report', function($http) {
-	return $http({
+	var updatePrice = function(updatedItem) {
+		return $http({
       method: 'POST',
       url: '/foodBuddy/items',
       data: updatedItem

@@ -7,19 +7,24 @@ var updateItem = Q.nbind(Item.update, Item);
 
 module.exports = {
 	updatePrice: function(req, res) {
-		console.log('updating price', req.body);
+
 		findItem({ name: req.body.name })
 		.then(function(item) {
 			if (item) {
-				return updateItem(req.body);
+				updateItem({name: req.body.name}, req.body, {upsert: true}, function(err){
+					if (err) { console.log(err); }
+					res.end();
+				});
 			} else {
 				return createItem(req.body);
 			}
 		})
 		.then(function(item) {
+			console.log('after update:', item);
 			res.send(item);
 		})
 		.fail(function(err) {
+			console.log(err);
 			res.status(500).send({error: err.message});
 		})
 	}

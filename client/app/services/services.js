@@ -29,3 +29,43 @@ angular.module('foodBuddy.services',[])
     retriveAllItems: retriveAllItems,
   };
 })
+
+.factory('Auth', function($http, $window, $location) {
+  var signin = function(user) {
+    return $http({
+      method: 'POST',
+      url: '/signin',
+      data: user
+    }).then(function(resp) {
+      console.log('login info sent');
+      return resp.data.token;
+    });
+  };
+
+  var signup = function(user) {
+    return $http({
+      method: 'POST',
+      url: '/signup',
+      data: user
+    }).then(function(resp) {
+      console.log('signup info sent');
+      return resp.data.token;
+    });
+  };
+
+  var isAuth = function() {
+    return !!$window.localstorage.getItem('foodBuddy');
+  };
+
+  var signOut = function() {
+    $window.localstorage.removeItem('foodBuddy');
+    $location.path('/signin')
+  };
+
+  return {
+    signin: signin,
+    signup: signup,
+    isAuth: isAuth,
+    signOut: signOut
+  }
+})

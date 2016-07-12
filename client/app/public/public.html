@@ -1,0 +1,34 @@
+<div id='container' class='report'>
+  <form ng-submit='updatePrice()'>
+  
+  	<label for="itemName">Item Name</label>
+    <input class='text' type='text' id='itemName' ng-model='item.name'>
+
+  	<label for="itemPrice">Item Price</label>
+    <input class='text' type='text' id='itemPrice' ng-model='item.price'>
+
+		<select ng-model="item.selectedStore" ng-options="storename for storename in stores"></select>
+
+    <input type='submit' value='report price'>
+
+    <div ng-hide='isValid()'>Not a valid price</div>
+  </form>
+</div>
+
+<form>
+    <input class='text filter' type='text' name='name' placeholder='filter items' ng-model='itemName'>
+</form>
+
+<table>
+	<tr>
+		<th>item name</th>
+		<th ng-repeat='store in stores'>{{ store }}</th>
+	</tr>
+
+	<tr ng-repeat='item in lists | filter : {"name" : itemName}'>
+		<td> {{item.name}} </td>
+		<td> {{item['Safeway']}} </td>
+		<td> {{item['Trader Joes']}} </td>
+		<td> {{item['Whole Foods']}} </td>
+	</tr>
+</table>

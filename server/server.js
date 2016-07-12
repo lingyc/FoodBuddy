@@ -14,4 +14,7 @@ app.use(express.static(__dirname + '/../client'));
 app.post('/items', itemController.updatePrice);
 app.get('/items', itemController.getAllItems);
 
+app.post('/signin', userController.signin);
+app.post('/signup', userController.signup);
+
 app.listen(8000);

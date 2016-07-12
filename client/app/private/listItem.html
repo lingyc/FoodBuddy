@@ -21,9 +21,9 @@
   </tr>
   <tr class='total'>
     <td> TOTALS </td>
-    <td> {{totalPrice.safeway}} </td>
-    <td> {{totalPrice.traderjoes}} </td>
-    <td> {{totalPrice.wholefoods}} </td>
+    <td ng-class='{bestPrice: bestPrice.safeway}'> {{totalPrice.safeway}} </td>
+    <td ng-class='{bestPrice: bestPrice.traderjoes}'> {{totalPrice.traderjoes}} </td>
+    <td ng-class='{bestPrice: bestPrice.wholefoods}'> {{totalPrice.wholefoods}} </td>
   </tr>
 </table>
 

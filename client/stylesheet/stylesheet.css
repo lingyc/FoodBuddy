@@ -174,3 +174,8 @@ body {
   font-weight: 400;
   padding-top: 15px;
 }
+
+.bestPrice {
+  font-weight: 700;
+  color: red;
+}

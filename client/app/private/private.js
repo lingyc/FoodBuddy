@@ -7,6 +7,7 @@ angular.module('foodBuddy.private', [])
   $scope.allGroceryItems;
   $scope.allListItems;
   $scope.totalPrice;
+  // $scope.bestPrice = {};
 
   $scope.retriveAllLists = function() {
   	console.log('retriveing list for', $scope.user);
@@ -43,7 +44,7 @@ angular.module('foodBuddy.private', [])
 
   $scope.setCurrentList = function(listName) {
     CurrentList.set(listName);
-    console.log(CurrentList.get());
+    // console.log(CurrentList.get());
     $rootScope.$emit('changeCurrentList');
   }
 
@@ -56,7 +57,7 @@ angular.module('foodBuddy.private', [])
     console.log('item to retrive:', itemObj);
     Private.retriveListItems(itemObj)
     .then(function(data){
-      console.log(data);
+      // console.log(data);
       $scope.allListItems = data;
       $scope.getTotalPrice(data);
     })
@@ -69,10 +70,10 @@ angular.module('foodBuddy.private', [])
     itemObj.listName = CurrentList.get();
     itemObj.itemName = itemName;
 
-    console.log('item to add:', itemObj);
+    // console.log('item to add:', itemObj);
     Private.addItemToList(itemObj)
     .then(function(resp){
-      console.log(resp);
+      // console.log(resp);
       $scope.retriveListItems();
     })
   }
@@ -87,15 +88,30 @@ angular.module('foodBuddy.private', [])
       traderjoes: 0,
       wholefoods: 0
     };
+    var min = {safeway: true};
+
     for (var i = 0; i < data.length; i++) {
       total.safeway += data[i].itemId['Safeway']
       total.traderjoes += data[i].itemId['Trader Joes']
       total.wholefoods += data[i].itemId['Whole Foods']
     }
+
     for (key in total) {
       total[key] = Math.round(total[key] * 100) / 100;
     }
+
+    console.log('here is total', total);
+    var minPrice = total.safeway;
+    for (key in total) {
+      if (total[key] < minPrice) {
+        var min = {};
+        min[key] = true;
+      }
+      console.log(min);
+    }
     $scope.totalPrice = total;
+    $scope.bestPrice = min;
+    // console.log('getting total price:', total, min);
   }
 
   $rootScope.$on('changeCurrentList', $scope.retriveListItems);

@@ -1,23 +1,17 @@
 angular.module('foodBuddy.services',[])
 
-.factory('Report', function($http) {
-	var updatePrice = function(updatedItem) {
-		return $http({
+.factory('Public', function($http) {
+  var updatePrice = function(updatedItem) {
+    return $http({
       method: 'POST',
       url: '/items',
       data: updatedItem
-		}).then(function(resp) {
+    }).then(function(resp) {
       console.log('data sent');
       return resp;
     });
-	};
-
-  return {
-    updatePrice: updatePrice,
   };
-})
 
-.factory('Public', function($http) {
   var retriveAllItems = function() {
     console.log('calling retriveAllItems');
     return $http({
@@ -31,6 +25,7 @@ angular.module('foodBuddy.services',[])
   };
 
   return {
+    updatePrice: updatePrice,
     retriveAllItems: retriveAllItems,
   };
 })

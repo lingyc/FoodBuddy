@@ -1,4 +1,4 @@
-<div id='container' class='lists'>
+<div id='container' class='listsItems'>
   <form ng-submit='createList(newList.name)'>
   	<label for="listName">List Name</label>
     <input class='text' type='text' id='listName' ng-model='newList.name'>
@@ -17,17 +17,3 @@
 		<div ng-click='removeList(list.name)'>remove</div>
 	</div>
 </div>
-
-<!-- <table>
-	<tr>
-		<th>item name</th>
-		<th ng-repeat='store in stores'>{{ store }}</th>
-	</tr>
-
-	<tr ng-repeat='item in lists | filter : {"name" : listName}'>
-		<td> {{item.name}} </td>
-		<td> {{item['Safeway']}} </td>
-		<td> {{item['Trader Joes']}} </td>
-		<td> {{item['Whole Foods']}} </td>
-	</tr>
-</table> -->

@@ -37,7 +37,7 @@ angular.module('foodBuddy.services',[])
       url: '/signin',
       data: user
     }).then(function(resp) {
-      console.log('login info sent');
+      console.log('login info sent', resp.data.token);
       return resp.data.token;
     });
   };
@@ -48,7 +48,7 @@ angular.module('foodBuddy.services',[])
       url: '/signup',
       data: user
     }).then(function(resp) {
-      console.log('signup info sent');
+      console.log('signup info sent', resp.data.token);
       return resp.data.token;
     });
   };

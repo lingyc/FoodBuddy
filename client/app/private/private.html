@@ -1,20 +1,23 @@
 <div id='container' class='lists'>
   <form ng-submit='createList(newList.name)'>
-  	<label for="listName">List Name</label>
+  	<label class='mylable' for="listName">List Name</label>
     <input class='text' type='text' id='listName' ng-model='newList.name'>
 
     <input type='submit' value='create list'>
   </form>
 </div>
 
-<form>
-    <input class='text filter' type='text' name='name' placeholder='filter items' ng-model='listName'>
-</form>
+<div class='private'>
+	<form>
+	    <input class='text filter' type='text' name='name' placeholder='filter items' ng-model='listName'>
+	</form>
 
-<div class='privateLists'>
-	<div class='list' ng-repeat='list in lists | filter : {"name" : listName}'>
-		<h2 ng-click='setCurrentList(list.name)'>{{ list.name }}</h2>
-		<button ng-click='removeList(list.name)'>remove</button>
+	<div class='privateLists'>
+		<h4>Your lists</h4>
+		<div class='listName' ng-repeat='list in lists | filter : {"name" : listName}'>
+			<h2 ng-click='setCurrentList(list.name)'>{{ list.name }}</h2>
+			<button ng-click='removeList(list.name)'>remove</button>
+		</div>
 	</div>
 </div>
 

@@ -1,13 +1,13 @@
 <div id='container' class='listsItems'>
   <form ng-submit='addListItem(newItem.name)'>
-  	<label for="itemName">Item Name</label>
+  	<label class='mylable' for="itemName">Item Name</label>
     <input class='text' type='text' id='itemName' ng-model='newItem.name'>
 
     <input type='submit' value='add item'>
   </form>
 </div>
 
-<table>
+<table class='myTable'>
   <tr>
     <th>item</th>
     <th ng-repeat='store in stores'>{{ store }}</th>

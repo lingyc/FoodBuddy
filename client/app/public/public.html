@@ -1,34 +1,37 @@
 <div id='container' class='report'>
   <form ng-submit='updatePrice()'>
   
-  	<label for="itemName">Item Name</label>
-    <input class='text' type='text' id='itemName' ng-model='item.name'>
+  	<label class='mylable' for="itemName">Item Name</label>
+    <input class='text mytext' type='text' id='itemName' ng-model='item.name'>
 
-  	<label for="itemPrice">Item Price</label>
-    <input class='text' type='text' id='itemPrice' ng-model='item.price'>
+  	<label class='mylable' for="itemPrice">Item Price</label>
+    <input class='text mytext' type='text' id='itemPrice' ng-model='item.price'>
 
-		<select ng-model="item.selectedStore" ng-options="storename for storename in stores"></select>
+		<select class='myselect' ng-model="item.selectedStore" ng-options="storename for storename in stores"></select>
 
-    <input type='submit' value='report price'>
+    <input class='mysubmit' type='submit' value='report price'>
 
-    <div ng-hide='isValid()'>Not a valid price</div>
+    <div class='invalid' ng-hide='isValid()'>Not a valid price</div>
   </form>
 </div>
 
-<form>
-    <input class='text filter' type='text' name='name' placeholder='filter items' ng-model='itemName'>
-</form>
+<div class='public'>
+	<h4>all price reported items</h4>
+	<form>
+	    <input class='text filter' type='text' name='name' placeholder='filter items' ng-model='itemName'>
+	</form>
 
-<table>
-	<tr>
-		<th>item name</th>
-		<th ng-repeat='store in stores'>{{ store }}</th>
-	</tr>
+	<table class='myTable'>
+		<tr>
+			<th >item name</th>
+			<th ng-repeat='store in stores'>{{ store }}</th>
+		</tr>
 
-	<tr ng-repeat='item in lists | filter : {"name" : itemName}'>
-		<td> {{item.name}} </td>
-		<td> {{item['Safeway']}} </td>
-		<td> {{item['Trader Joes']}} </td>
-		<td> {{item['Whole Foods']}} </td>
-	</tr>
-</table>
+		<tr ng-repeat='item in lists | filter : {"name" : itemName}'>
+			<td> {{item.name}} </td>
+			<td> {{item['Safeway']}} </td>
+			<td> {{item['Trader Joes']}} </td>
+			<td> {{item['Whole Foods']}} </td>
+		</tr>
+	</table>
+</div>

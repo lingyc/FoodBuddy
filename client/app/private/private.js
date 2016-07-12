@@ -92,6 +92,9 @@ angular.module('foodBuddy.private', [])
       total.traderjoes += data[i].itemId['Trader Joes']
       total.wholefoods += data[i].itemId['Whole Foods']
     }
+    for (key in total) {
+      total[key] = Math.round(total[key] * 100) / 100;
+    }
     $scope.totalPrice = total;
   }
 

@@ -3,8 +3,6 @@ angular.module('foodBuddy', [
 	'foodBuddy.public',
   'foodBuddy.auth',
   'foodBuddy.private', 
-  // 'foodBuddy.listItem',
-  // 'ui.grid',
 	'ui.router'
 ])
 

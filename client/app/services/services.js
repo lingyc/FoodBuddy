@@ -85,14 +85,16 @@ angular.module('foodBuddy.services',[])
     }).then(function(resp) {
       return resp;
     });
-
   }
 
   var retriveListItems = function(list) {
     return $http({
       method: 'GET',
       url: '/list_items',
-      params: {username: user.username}
+      params: {
+        username: list.username,
+        listName: list.listName,
+      }
     }).then(function(resp) {
       console.log('data sent');
       return resp.data;

@@ -11,14 +11,21 @@
 <table>
   <tr>
     <th>item</th>
+    <div ng-click='retriveListItems()'>get</div>
     <th ng-repeat='store in stores'>{{ store }}</th>
   </tr>
 
-  <tr ng-repeat='item in listItems' ng-click='removeListItem(item.name)'>
+  <tr ng-repeat='item in allListItems' ng-click='removeListItem(item.name)'>
     <td> {{item.name}} </td>
-    <td> {{item['Safeway']}} </td>
-    <td> {{item['Trader Joes']}} </td>
-    <td> {{item['Whole Foods']}} </td>
+    <td> {{item.itemId['Safeway']}} </td>
+    <td> {{item.itemId['Trader Joes']}} </td>
+    <td> {{item.itemId['Whole Foods']}} </td>
+  </tr>
+  <tr class='total'>
+    <td> TOTALS </td>
+    <td> {{safeway}} </td>
+    <td> {{traderjoes}} </td>
+    <td> {{wholefoods}} </td>
   </tr>
 </table>
 

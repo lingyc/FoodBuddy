@@ -1,10 +1,13 @@
 var ListItem = require('./listItemModel');
 var List = require('../lists/listModel');
 var Item = require('../items/itemModel');
+var User = require('../users/userModel');
 var Q = require('q');
 
 var findList = Q.nbind(List.findOne, List);
 var findItem = Q.nbind(Item.findOne, Item);
+var findUser = Q.nbind(User.findOne, User);
+
 
 var findAllListItem = Q.nbind(ListItem.find, ListItem);
 var findListItem = Q.nbind(ListItem.findOne, ListItem);
@@ -23,7 +26,6 @@ module.exports = {
 			return findItem({name: res.body.itemName})
 		})
 		.then(function(item){
-			// console.log('found item', item);
 			if (item) {
 				currentItem = item._id;
 				return findListItem({
@@ -41,8 +43,6 @@ module.exports = {
 				console.log('item exsits');
 				req.status(500).send({error: "item already exist"});
 			} else {
-				// console.log('currentList', currentList);
-				// console.log('currentItem', currentItem);
 				return createListItem({
 					name: res.body.itemName,
 					listId: currentList,
@@ -60,7 +60,26 @@ module.exports = {
     });
 	},
 
-	retriveListItems: function(res, req) {
-
+	retriveListItems: function(req, res) {
+		console.log(req.query);
+		var currentListId;
+		findUser({ username: req.query.username })
+		.then(function(user) {
+			console.log('found user:', user);
+			return findList({ userId: user._id, name: req.query.listName })
+		})
+		.then(function(list){
+			ListItem.find({listId: list._id})
+			.populate('itemId')
+			.exec(function(err, items) {
+				if (err) {
+					console.log('not finding items', err);
+					res.status(500).send({error: "cannot retrive listItems"});
+				} else {
+					console.log('found these items', items);
+					res.json(items);
+				}
+			});
+		})
 	}
 }

@@ -14,7 +14,7 @@
 <div class='privateLists'>
 	<div class='list' ng-repeat='list in lists | filter : {"name" : listName}'>
 		<h2 ng-click='setCurrentList(list.name)'>{{ list.name }}</h2>
-		<div ng-click='removeList(list.name)'>remove</div>
+		<button ng-click='removeList(list.name)'>remove</button>
 	</div>
 </div>
 

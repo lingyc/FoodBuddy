@@ -17,4 +17,7 @@ app.get('/items', itemController.getAllItems);
 app.post('/signin', userController.signin);
 app.post('/signup', userController.signup);
 
+// app.post('/lists', itemController.updatePrice);
+// app.get('/lists', itemController.getAllItems);
+
 app.listen(8000);

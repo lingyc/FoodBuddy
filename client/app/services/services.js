@@ -30,6 +30,86 @@ angular.module('foodBuddy.services',[])
   };
 })
 
+.factory('Private', function($http) {
+  var retriveAllLists = function(user) {
+    return $http({
+      method: 'GET',
+      url: '/lists',
+      data: user
+    }).then(function(resp) {
+      return resp.body;
+    });
+  }
+
+  var createList = function(newList) {
+    return $http({
+      method: 'POST',
+      url: '/addlist',
+      data: newList
+    }).then(function(resp) {
+      console.log('data sent');
+      return resp;
+    });
+  }
+
+  var removeList = function(list) {
+    return $http({
+      method: 'POST',
+      url: '/removelist',
+      data: list
+    }).then(function(resp) {
+      console.log('data sent');
+      return resp;
+    });
+
+  }
+
+  var retriveListItems = function(list) {
+    return $http({
+      method: 'GET',
+      url: '/list_items',
+      data: list
+    }).then(function(resp) {
+      console.log('data sent');
+      return resp;
+    });
+  }
+
+  var addItemToList = function(item) {
+    return $http({
+      method: 'POST',
+      url: '/add_list_items',
+      data: item
+    }).then(function(resp) {
+      console.log('data sent');
+      return resp;
+    });
+  }
+
+  var removeItemToList = function(item) {
+    return $http({
+      method: 'POST',
+      url: '/remove_list_items',
+      data: item
+    }).then(function(resp) {
+      console.log('data sent');
+      return resp;
+    });
+  }
+
+  return {
+    retriveAllLists: retriveAllLists,
+    createList: createList,
+    removeList: removeList,
+    retriveListItems: retriveListItems,
+    addItemToList: addItemToList,
+    removeItemToList: removeItemToList
+  }
+
+})
+
+
+
 .factory('Auth', function($http, $window, $location) {
   var signin = function(user) {
     return $http({

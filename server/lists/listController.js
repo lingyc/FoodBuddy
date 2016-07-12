@@ -1,42 +1,51 @@
 var List = require('./listModel');
-var User = require('./userModel');
+var User = require('../users/userModel');
 
 var Q = require('q');
 
 var findUser = Q.nbind(User.findOne, User);
 
-var findAllList = Q.nbind(List.findOne, List);
+var findAllList = Q.nbind(List.find, List);
 var findList = Q.nbind(List.findOne, List);
 var createList = Q.nbind(List.create, List);
 var removeList = Q.nbind(List.remove, List);
 
 module.exports = {
-	retriveAllLists: function(res, req) {
-		findUser({ username: req.body.username })
+	retriveAllLists: function(req, res) {
+		// console.log('getting all list', req.query.username );
+		findUser({ username: req.query.username })
 		.then(function(user) {
+			// console.log('found user:', user);
 			return findAllList({ userId: user._id })
 		})
 		.then(function(lists){
+			console.log('sending lists:', lists);
 			res.json(lists);
 		})
     .fail(function (error) {
     	console.log('fail retrive lists');
 			res.status(500).send({error: "cannot retrive lists"});
     });
-	}
+	},
 
-	createList: function(res, req) {
+	createNewList: function(req, res) {
+		var currentUser;
+		console.log('creating req.body.username', req.body);
 		findUser({ username: req.body.username })
 		.then(function(user) {
-			return findList({ userId: user._id, name: req.body.listName })
+			console.log(user);
+			currentUser = user;
+			return findList({ userId: user._id, name: req.body.name });
 		})
 		.then(function(list){
 			if (list) {
-				res.status(500).send({error: "user already exist"});
+				console.log('list exsits');
+				res.status(500).send({error: "list already exist"});
 			} else {
+				console.log('creating list')
 				return createList({
-					userId: user._id,
-					name: req.body.listName
+					name: req.body.name,
+					userId: currentUser._id
 				});
 			}
 		})
@@ -47,9 +56,9 @@ module.exports = {
     	console.log('fail retrive lists');
 			res.status(500).send({error: "cannot retrive lists"});
     });
-	}
+	},
 
-	remove: function(res, req) {
+	remove: function(req, res) {
 		findUser({ username: req.body.username })
 		.then(function(user) {
 			return findList({ userId: user._id, name: req.body.listName })

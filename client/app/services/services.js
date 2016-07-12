@@ -1,5 +1,18 @@
 angular.module('foodBuddy.services',[])
 
+.factory('User', function ($rootScope) {
+  var user = {};
+
+  return {
+    set: function (username) {
+        user.username = username;
+    },
+    get: function () {
+        return user.username;
+    }
+  };
+})
+
 .factory('Public', function($http) {
   var updatePrice = function(updatedItem) {
     return $http({
@@ -30,14 +43,16 @@ angular.module('foodBuddy.services',[])
   };
 })
 
-.factory('Private', function($http) {
+.factory('Private', function($http, User) {
   var retriveAllLists = function(user) {
+    // console.log('this is user:',user);
     return $http({
       method: 'GET',
       url: '/lists',
-      data: user
+      params: {username: user.username}
     }).then(function(resp) {
-      return resp.body;
+      console.log(resp.data);
+      return resp.data;
     });
   }
 
@@ -105,12 +120,11 @@ angular.module('foodBuddy.services',[])
     addItemToList: addItemToList,
     removeItemToList: removeItemToList
   }
-
 })
 
 
 
-.factory('Auth', function($http, $window, $location) {
+.factory('Auth', function($http, $window, $location, User) {
   var signin = function(user) {
     return $http({
       method: 'POST',
@@ -118,8 +132,13 @@ angular.module('foodBuddy.services',[])
       data: user
     }).then(function(resp) {
       console.log('login info sent', resp.data.token);
+      User.set(user.username)
+      console.log(User.get());
       return resp.data.token;
-    });
+    })
+    .catch(function(err){
+      console.log(err);
+    })
   };
 
   var signup = function(user) {
@@ -129,8 +148,12 @@ angular.module('foodBuddy.services',[])
       data: user
     }).then(function(resp) {
       console.log('signup info sent', resp.data.token);
+      User.set(user.username)
       return resp.data.token;
-    });
+    })
+    .catch(function(err){
+      console.log(err);
+    })
   };
 
   var isAuth = function() {

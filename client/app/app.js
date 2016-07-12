@@ -2,6 +2,7 @@ angular.module('foodBuddy', [
 	'foodBuddy.services',
 	'foodBuddy.public',
   'foodBuddy.auth',
+  'foodBuddy.private',  
   // 'ui.grid',
 	'ui.router'
 ])
@@ -24,6 +25,11 @@ angular.module('foodBuddy', [
       url: '/signup',
       templateUrl: '/app/auth/signup.html',
       controller: 'AuthCtrl'
+    })
+    .state('private', {
+      url: '/private',
+      templateUrl: '/app/private/private.html',
+      controller: 'PrivateCtrl'
     })
 
   $httpProvider.interceptors.push('AttachTokens');

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var timestamps = require('mongoose-timestamp');
 
 var listSchema = new Schema({
 	name: String,
@@ -7,7 +8,7 @@ var listSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  timestamps: true
 });
 
+listSchema.plugin(timestamps);
 module.exports = mongoose.model('List', listSchema);

@@ -14,6 +14,6 @@ angular.module('foodBuddy.report', [])
   };
 
   $scope.isValid = function() {
-  	return ($scope.item.price < 0 || !$scope.item.price.match(/[0-9]+(\.[0-9][0-9]?)?/)) ? false : true;
+  	return (!$scope.item.price || $scope.item.price < 0 || !$scope.item.price.match(/[0-9]+(\.[0-9][0-9]?)?/)) ? false : true;
   };
 })

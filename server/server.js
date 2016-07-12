@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client'));
 
-app.post('/foodBuddy/items', itemController.updatePrice)
+app.post('/items', itemController.updatePrice);
+app.get('/items', itemController.getAllItems);
 
 app.listen(8000);

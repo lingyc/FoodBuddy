@@ -1,6 +1,8 @@
 angular.module('foodBuddy', [
 	'foodBuddy.services',
 	'foodBuddy.report',
+	'foodBuddy.public',
+  'ngTable',
 	'ui.router'
 ])
 
@@ -9,8 +11,14 @@ angular.module('foodBuddy', [
 
   $stateProvider
     .state('report', {
-      url: '/',
+      url: '/report',
       templateUrl: '/app/report/report.html',
       controller: 'ReportCtrl'
     })
+    .state('public', {
+      url: '/',
+      templateUrl: '/app/public/public.html',
+      controller: 'PublicCtrl'
+    })
+
 });

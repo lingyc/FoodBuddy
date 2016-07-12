@@ -51,7 +51,6 @@ angular.module('foodBuddy.services',[])
       url: '/lists',
       params: {username: user.username}
     }).then(function(resp) {
-      console.log(resp.data);
       return resp.data;
     });
   }
@@ -62,7 +61,7 @@ angular.module('foodBuddy.services',[])
       url: '/addlist',
       data: newList
     }).then(function(resp) {
-      console.log('data sent');
+      console.log('server response:', resp);
       return resp;
     });
   }
@@ -73,7 +72,6 @@ angular.module('foodBuddy.services',[])
       url: '/removelist',
       data: list
     }).then(function(resp) {
-      console.log('data sent');
       return resp;
     });
 

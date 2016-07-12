@@ -12,7 +12,7 @@
 </form>
 
 <div class='privateLists'>
-	<div class='list' ng-repeat='list in lists'>
+	<div class='list' ng-repeat='list in lists | filter : {"name" : listName}'>
 		<h2>{{ list.name }}</h2>
 		<div ng-click='removeList(list.name)'>remove</div>
 	</div>

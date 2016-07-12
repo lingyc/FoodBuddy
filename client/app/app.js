@@ -29,7 +29,8 @@ angular.module('foodBuddy', [
     .state('private', {
       url: '/private',
       templateUrl: '/app/private/private.html',
-      controller: 'PrivateCtrl'
+      controller: 'PrivateCtrl',
+      authenticate: true
     })
 
   $httpProvider.interceptors.push('AttachTokens');
@@ -52,6 +53,7 @@ angular.module('foodBuddy', [
 
   $rootScope.$on('$routeChangeStart', function (evt, next, current) {
     if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
+      console.log('auth fail, back to signin');
       $location.path('/signin');
     }
   });

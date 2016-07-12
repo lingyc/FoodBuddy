@@ -15,7 +15,7 @@ module.exports = {
 		// console.log('getting all list', req.query.username );
 		findUser({ username: req.query.username })
 		.then(function(user) {
-			// console.log('found user:', user);
+			console.log('found user:', user);
 			return findAllList({ userId: user._id })
 		})
 		.then(function(lists){
@@ -50,7 +50,7 @@ module.exports = {
 			}
 		})
 		.then(function(lists){
-    	console.log('successfully create lists: ', lists);
+			res.status(201).send('created list');
 		})
     .fail(function (error) {
     	console.log('fail retrive lists');
@@ -61,12 +61,16 @@ module.exports = {
 	remove: function(req, res) {
 		findUser({ username: req.body.username })
 		.then(function(user) {
-			return findList({ userId: user._id, name: req.body.listName })
+			console.log('remove found:', user);
+			return findList({ userId: user._id, name: req.body.name })
 		})
 		.then(function(list){
 			//remove corresponding listItems
 			console.log('deleting list', list);
-			return removeList({ name: req.body.listName });
+			return removeList({ name: req.body.name });
+		})
+		.then(function(list) {
+			res.status(202).send('deleted list');
 		})
     .fail(function (error) {
     	console.log('fail to delete lists');

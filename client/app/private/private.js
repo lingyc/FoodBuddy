@@ -7,7 +7,7 @@ angular.module('foodBuddy.private', [])
 	$scope.currentList;
 
   $scope.retriveAllLists = function() {
-  	// console.log('retriveing list for', $scope.user);
+  	console.log('retriveing list for', $scope.user);
   	Private.retriveAllLists($scope.user)
   	.then(function(lists){
       console.log('retrived list:', lists)
@@ -23,7 +23,8 @@ angular.module('foodBuddy.private', [])
   	console.log('sending list', listObj);
   	Private.createList(listObj)
   	.then(function(resp){
-  		console.log(resp);
+      console.log('calling retriveAllLists after createList');
+      $scope.retriveAllLists();
   	})
   }
 
@@ -34,7 +35,8 @@ angular.module('foodBuddy.private', [])
 
   	Private.removeList(listObj)
   	.then(function(resp){
-  		console.log(resp);
+      console.log('calling retriveAllLists after removeList');
+      $scope.retriveAllLists();
   	})
   }
 

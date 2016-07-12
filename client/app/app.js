@@ -2,7 +2,7 @@ angular.module('foodBuddy', [
 	'foodBuddy.services',
 	'foodBuddy.report',
 	'foodBuddy.public',
-  'ngTable',
+  'ui.grid',
 	'ui.router'
 ])
 

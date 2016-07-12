@@ -1,4 +1,4 @@
-angular.module('foodBuddy.services', [])
+angular.module('foodBuddy.services',[])
 
 .factory('Report', function($http) {
 	var updatePrice = function(updatedItem) {

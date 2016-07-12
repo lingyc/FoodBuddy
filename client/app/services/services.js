@@ -2,13 +2,24 @@ angular.module('foodBuddy.services',[])
 
 .factory('User', function ($rootScope) {
   var user = {};
-
   return {
     set: function (username) {
-        user.username = username;
+      user.username = username;
     },
     get: function () {
-        return user.username;
+      return user.username;
+    }
+  };
+})
+
+.factory('CurrentList', function ($rootScope) {
+  var currentlist = {};
+  return {
+    set: function (currentlistName) {
+      currentlist.name = currentlistName;
+    },
+    get: function () {
+      return currentlist.name;
     }
   };
 })
@@ -81,10 +92,10 @@ angular.module('foodBuddy.services',[])
     return $http({
       method: 'GET',
       url: '/list_items',
-      data: list
+      params: {username: user.username}
     }).then(function(resp) {
       console.log('data sent');
-      return resp;
+      return resp.data;
     });
   }
 

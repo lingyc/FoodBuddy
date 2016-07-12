@@ -1,19 +1,31 @@
 <div id='container' class='listsItems'>
-  <form ng-submit='createList(newList.name)'>
-  	<label for="listName">List Name</label>
-    <input class='text' type='text' id='listName' ng-model='newList.name'>
+<div> showing lists!!!!!</div>
+  <form ng-submit='addListItem(newItem.name)'>
+  	<label for="itemName">Item Name</label>
+    <input class='text' type='text' id='itemName' ng-model='newItem.name'>
 
-    <input type='submit' value='create list'>
+    <input type='submit' value='add item'>
   </form>
 </div>
 
-<form>
-    <input class='text filter' type='text' name='name' placeholder='filter items' ng-model='listName'>
-</form>
+<table>
+  <tr>
+    <th>item</th>
+    <th ng-repeat='store in stores'>{{ store }}</th>
+  </tr>
 
-<div class='privateLists'>
-	<div class='list' ng-repeat='list in lists | filter : {"name" : listName}'>
-		<h2>{{ list.name }}</h2>
-		<div ng-click='removeList(list.name)'>remove</div>
+  <tr ng-repeat='item in listItems' ng-click='removeListItem(item.name)'>
+    <td> {{item.name}} </td>
+    <td> {{item['Safeway']}} </td>
+    <td> {{item['Trader Joes']}} </td>
+    <td> {{item['Whole Foods']}} </td>
+  </tr>
+</table>
+
+<!-- <div>
+	<div class='listItem' ng-repeat='item in listItems'>
+		<h2>{{ item.name }}</h2>
+		<div ng-click='removeListItem(list.name)'>remove</div>
 	</div>
 </div>
+ -->

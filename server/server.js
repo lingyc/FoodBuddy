@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var itemController = require('./items/itemController');
 var userController = require('./users/userController');
 var listController = require('./lists/listController');
+var listItemController = require('./listItems/listItemController');
 
 var app = express();
 mongoose.connect('mongodb://localhost/foodBuddy');
@@ -22,5 +23,7 @@ app.get('/lists', listController.retriveAllLists);
 app.post('/addlist', listController.createNewList);
 app.post('/removelist', listController.remove);
 
+app.post('/add_list_items', listItemController.addItemToList);
+app.get('/list_items', listItemController.retriveListItems);
 
 app.listen(8000);

@@ -2,7 +2,8 @@ angular.module('foodBuddy', [
 	'foodBuddy.services',
 	'foodBuddy.public',
   'foodBuddy.auth',
-  'foodBuddy.private',  
+  'foodBuddy.private', 
+  // 'foodBuddy.listItem',
   // 'ui.grid',
 	'ui.router'
 ])
@@ -28,8 +29,16 @@ angular.module('foodBuddy', [
     })
     .state('private', {
       url: '/private',
-      templateUrl: '/app/private/private.html',
-      controller: 'PrivateCtrl',
+      views: {
+        "lists": {
+          templateUrl: '/app/private/private.html',
+          controller: 'PrivateCtrl',
+        },
+        "listItems": {
+          templateUrl: '/app/private/listItem.html',
+          controller: 'PrivateCtrl',
+        }
+      },
       authenticate: true
     })
 

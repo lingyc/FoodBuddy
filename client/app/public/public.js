@@ -2,7 +2,7 @@ angular.module('foodBuddy.public', [])
 
 .controller('PublicCtrl', function($scope, Public) {
   $scope.item = {};
-  $scope.stores = ['Safeway', 'Trader Joes', 'Whole Foods']
+  $scope.stores = ['Safeway', 'Trader Joes', 'Whole Foods'];
 
   $scope.updatePrice = function() {
   	var itemToSend = {};

@@ -1,11 +1,12 @@
 angular.module('foodBuddy.private', [])
 
-.controller('PrivateCtrl', function($scope, Private, User, CurrentList) {
+.controller('PrivateCtrl', function($scope, Private, User, CurrentList, $rootScope) {
 	$scope.user = {};
   $scope.stores = ['Safeway', 'Trader Joes', 'Whole Foods']
   $scope.user.username = User.get();
   $scope.allGroceryItems;
   $scope.allListItems;
+  $scope.totalPrice;
 
   $scope.retriveAllLists = function() {
   	console.log('retriveing list for', $scope.user);
@@ -13,7 +14,6 @@ angular.module('foodBuddy.private', [])
   	.then(function(lists){
       console.log('retrived list:', lists)
   		$scope.lists = lists;
-  		//should i also retrive listItem here too?
   	})
   }
 
@@ -44,6 +44,7 @@ angular.module('foodBuddy.private', [])
   $scope.setCurrentList = function(listName) {
     CurrentList.set(listName);
     console.log(CurrentList.get());
+    $rootScope.$emit('changeCurrentList');
   }
 
   $scope.retriveListItems = function() {
@@ -57,6 +58,7 @@ angular.module('foodBuddy.private', [])
     .then(function(data){
       console.log(data);
       $scope.allListItems = data;
+      $scope.getTotalPrice(data);
     })
   }
 
@@ -79,17 +81,21 @@ angular.module('foodBuddy.private', [])
     
   }
 
-  $scope.totalPrice = function(data) {
+  $scope.getTotalPrice = function(data) {
     var total = {
       safeway: 0,
       traderjoes: 0,
       wholefoods: 0
     };
     for (var i = 0; i < data.length; i++) {
-      data[i].itemId['Safeway']
+      total.safeway += data[i].itemId['Safeway']
+      total.traderjoes += data[i].itemId['Trader Joes']
+      total.wholefoods += data[i].itemId['Whole Foods']
     }
+    $scope.totalPrice = total;
   }
 
+  $rootScope.$on('changeCurrentList', $scope.retriveListItems);
   $scope.retriveAllLists();
 })
 

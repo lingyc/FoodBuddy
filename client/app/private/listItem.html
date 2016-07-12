@@ -1,5 +1,4 @@
 <div id='container' class='listsItems'>
-<div> showing lists!!!!!</div>
   <form ng-submit='addListItem(newItem.name)'>
   	<label for="itemName">Item Name</label>
     <input class='text' type='text' id='itemName' ng-model='newItem.name'>
@@ -11,7 +10,6 @@
 <table>
   <tr>
     <th>item</th>
-    <div ng-click='retriveListItems()'>get</div>
     <th ng-repeat='store in stores'>{{ store }}</th>
   </tr>
 
@@ -23,9 +21,9 @@
   </tr>
   <tr class='total'>
     <td> TOTALS </td>
-    <td> {{safeway}} </td>
-    <td> {{traderjoes}} </td>
-    <td> {{wholefoods}} </td>
+    <td> {{totalPrice.safeway}} </td>
+    <td> {{totalPrice.traderjoes}} </td>
+    <td> {{totalPrice.wholefoods}} </td>
   </tr>
 </table>
 

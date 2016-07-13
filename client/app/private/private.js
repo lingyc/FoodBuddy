@@ -100,18 +100,15 @@ angular.module('foodBuddy.private', [])
       total[key] = Math.round(total[key] * 100) / 100;
     }
 
-    console.log('here is total', total);
     var minPrice = total.safeway;
     for (key in total) {
       if (total[key] < minPrice) {
         var min = {};
         min[key] = true;
       }
-      console.log(min);
     }
     $scope.totalPrice = total;
     $scope.bestPrice = min;
-    // console.log('getting total price:', total, min);
   }
 
   $rootScope.$on('changeCurrentList', $scope.retriveListItems);

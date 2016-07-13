@@ -24,6 +24,8 @@ app.post('/addlist', listController.createNewList);
 app.post('/removelist', listController.remove);
 
 app.post('/add_list_items', listItemController.addItemToList);
+app.post('/remove_list_items', listItemController.removeListItem);
 app.get('/list_items', listItemController.retriveListItems);
+
 
 app.listen(8000);

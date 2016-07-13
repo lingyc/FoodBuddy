@@ -81,5 +81,25 @@ module.exports = {
 				}
 			});
 		})
+	},
+
+	removeListItem: function(req, res) {
+		console.log(req.body);
+		findUser({ username: req.body.username })
+		.then(function(user) {
+			console.log('remove found:', user);
+			return findList({ userId: user._id, name: req.body.listName })
+		})
+		.then(function(list){
+			console.log('deleting list', list);
+			return removeListItem({ name: req.body.itemName, listId: list._id });
+		})
+		.then(function(list) {
+			res.status(202).send('deleted item from list');
+		})
+    .fail(function (error) {
+    	console.log('fail to delete item from list');
+			res.status(500).send({error: "cannot delete item from list"});
+    });
 	}
 }

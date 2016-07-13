@@ -112,7 +112,7 @@ angular.module('foodBuddy.services',[])
     });
   }
 
-  var removeItemToList = function(item) {
+  var removeItemFromList = function(item) {
     return $http({
       method: 'POST',
       url: '/remove_list_items',
@@ -129,7 +129,7 @@ angular.module('foodBuddy.services',[])
     removeList: removeList,
     retriveListItems: retriveListItems,
     addItemToList: addItemToList,
-    removeItemToList: removeItemToList
+    removeItemFromList: removeItemFromList
   }
 })
 

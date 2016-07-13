@@ -44,7 +44,6 @@ angular.module('foodBuddy.private', [])
 
   $scope.setCurrentList = function(listName) {
     CurrentList.set(listName);
-    // console.log(CurrentList.get());
     $rootScope.$emit('changeCurrentList');
   }
 
@@ -57,7 +56,6 @@ angular.module('foodBuddy.private', [])
     console.log('item to retrive:', itemObj);
     Private.retriveListItems(itemObj)
     .then(function(data){
-      // console.log(data);
       $scope.allListItems = data;
       $scope.getTotalPrice(data);
     })
@@ -79,7 +77,15 @@ angular.module('foodBuddy.private', [])
   }
 
   $scope.removeListItem = function(itemName) {
-    
+    var itemObj = {};
+    itemObj.username = $scope.user.username;
+    itemObj.listName = CurrentList.get();
+    itemObj.itemName = itemName;
+
+    Private.removeItemFromList(itemObj)
+    .then(function(resp) {
+      $scope.retriveListItems();
+    })
   }
 
   $scope.getTotalPrice = function(data) {

@@ -12,7 +12,6 @@ var removeList = Q.nbind(List.remove, List);
 
 module.exports = {
 	retriveAllLists: function(req, res) {
-		// console.log('getting all list', req.query.username );
 		findUser({ username: req.query.username })
 		.then(function(user) {
 			console.log('found user:', user);

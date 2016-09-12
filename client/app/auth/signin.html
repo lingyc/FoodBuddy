@@ -4,6 +4,6 @@
 		<input type="text" placeholder="password" name="password" ng-model="user.password">
 		<input type="submit" value="signin">
 	</form>
-
+	<div class='invalid' ng-hide='loginFailed'>invalid username or password</div>
 	<a href="#/signup">Go to Sign up</a>
 </div>

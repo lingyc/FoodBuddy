@@ -5,6 +5,8 @@ var itemController = require('./items/itemController');
 var userController = require('./users/userController');
 var listController = require('./lists/listController');
 var listItemController = require('./listItems/listItemController');
+var ip = '127.0.0.1';
+var port = 8000;
 
 var app = express();
 mongoose.connect('mongodb://localhost/foodBuddy');
@@ -28,4 +30,5 @@ app.post('/remove_list_items', listItemController.removeListItem);
 app.get('/list_items', listItemController.retriveListItems);
 
 
-app.listen(8000);
+app.listen(port);
+console.log('Listening on http://' + ip + ':' + port);

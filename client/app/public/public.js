@@ -17,17 +17,18 @@ angular.module('foodBuddy.public', [])
   };
 
   $scope.isValid = function() {
-  	return (!$scope.item.price || $scope.item.price < 0 || !$scope.item.price.match(/[0-9]+(\.[0-9][0-9]?)?/)) ? false : true;
+    return (!$scope.item.price || $scope.item.price > 0);
+  	// return (!$scope.item.price || $scope.item.price < 0 || !$scope.item.price.match(/[0-9]+(\.[0-9][0-9]?)?/)) ? false : true;
   };
 
   $scope.retriveAllItems = function() {
 		Public.retriveAllItems()
 		.then(function(data){
-			console.log('data retrived: ', $scope.lists);
-			$scope.lists = data;
+      $scope.lists = data;
+			// console.log('data retrived: ', $scope.lists);
 		})
 		.catch(function(err){
-			console.log(err);
+			console.log(err.data.error);
 		})
   }
 

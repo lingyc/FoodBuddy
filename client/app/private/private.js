@@ -71,7 +71,7 @@ angular.module('foodBuddy.private', [])
     // console.log('item to add:', itemObj);
     Private.addItemToList(itemObj)
     .then(function(resp){
-      // console.log(resp);
+      console.log(resp);
       $scope.retriveListItems();
     })
   }

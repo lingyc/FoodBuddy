@@ -4,6 +4,6 @@
 		<input type="text" placeholder="password" name="password" ng-model="user.password">
 		<input type="submit" value="signup">
 	</form>
-
+	<div class='invalid' ng-hide='userExist'>username already taken</div>
 	<a href="#/signin">Go to Sign in</a>
 </div>

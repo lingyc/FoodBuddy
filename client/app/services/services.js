@@ -31,8 +31,10 @@ angular.module('foodBuddy.services',[])
       url: '/items',
       data: updatedItem
     }).then(function(resp) {
-      console.log('data sent');
+      console.log('data sent, /items');
       return resp;
+    }).catch(function(err) {
+      console.log(err);
     });
   };
 
@@ -142,13 +144,12 @@ angular.module('foodBuddy.services',[])
       url: '/signin',
       data: user
     }).then(function(resp) {
-      console.log('login info sent', resp.data.token);
       User.set(user.username)
-      console.log(User.get());
       return resp.data.token;
     })
     .catch(function(err){
-      console.log(err);
+      console.log('bad login, wrong username or password');
+      throw err;
     })
   };
 
@@ -158,12 +159,13 @@ angular.module('foodBuddy.services',[])
       url: '/signup',
       data: user
     }).then(function(resp) {
-      console.log('signup info sent', resp.data.token);
       User.set(user.username)
       return resp.data.token;
     })
     .catch(function(err){
-      console.log(err);
+      // console.log(err.data.error);
+      console.log('username exist');
+      throw err;
     })
   };
 

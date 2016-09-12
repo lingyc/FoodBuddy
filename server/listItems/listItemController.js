@@ -34,14 +34,14 @@ module.exports = {
 					itemId: currentItem,
 				})
 			} else {
-				console.log('item not exsits');
-				req.status(500).send({error: "item not exist"});
+				console.log('item not exsits in public pool');
+				throw new Error('no price is reported for this item');
 			}
 		})
 		.then(function(found){
 			if (found) {
 				console.log('item exsits');
-				req.status(500).send({error: "item already exist"});
+				throw new Error('item already exist in the list');
 			} else {
 				return createListItem({
 					name: res.body.itemName,
@@ -56,7 +56,7 @@ module.exports = {
 		})
     .fail(function (error) {
     	console.log('fail to add item', error);
-			req.status(500).send({error: "cannot add item"});
+			req.status(500).send({error: error.message});
     });
 	},
 

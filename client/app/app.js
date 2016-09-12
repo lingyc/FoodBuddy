@@ -25,6 +25,7 @@ angular.module('foodBuddy', [
       templateUrl: '/app/auth/signup.html',
       controller: 'AuthCtrl'
     })
+
     .state('private', {
       url: '/private',
       views: {
@@ -57,9 +58,8 @@ angular.module('foodBuddy', [
   return attach;
 })
 .run(function ($rootScope, $location, Auth) {
-
-  $rootScope.$on('$routeChangeStart', function (evt, next, current) {
-    if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
+  $rootScope.$on('$stateChangeStart', function (evt, toState, toParams, fromState, fromParams) {
+    if (toState && toState.authenticate && !Auth.isAuth()) {
       console.log('auth fail, back to signin');
       $location.path('/signin');
     }

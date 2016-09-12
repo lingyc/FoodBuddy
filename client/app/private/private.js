@@ -1,26 +1,41 @@
 angular.module('foodBuddy.private', [])
 
-.controller('PrivateCtrl', function($scope, Private, User, CurrentList, $rootScope) {
+.controller('PrivateCtrl', function($scope, Public, Private, User, CurrentList, $rootScope) {
 	$scope.user = {};
   $scope.stores = ['Safeway', 'Trader Joes', 'Whole Foods']
-  $scope.user.username = User.get();
   $scope.allGroceryItems;
   $scope.allListItems;
   $scope.totalPrice;
+  $scope.error = true;
+  $scope.errorMessage = '';
+  $scope.dropDownItems = [];
   // $scope.bestPrice = {};
+
+  $scope.retriveAllItems = function() {
+    Public.retriveAllItems()
+    .then(function(data){
+      $scope.dropDownItems = data;
+    })
+    .catch(function(err){
+      console.log(err.data.error);
+    })
+  }
 
   $scope.retriveAllLists = function() {
   	console.log('retriveing list for', $scope.user);
-  	Private.retriveAllLists($scope.user)
+  	Private.retriveAllLists(User.get())
   	.then(function(lists){
       console.log('retrived list:', lists)
   		$scope.lists = lists;
   	})
+    .catch(function(err){
+      console.log('retriveAllLists error');
+    });
   }
 
   $scope.createList = function(listName) {
   	var listObj = {};
-  	listObj.username = $scope.user.username;
+  	listObj.username = User.get();
   	listObj.name = listName;
   	console.log('sending list', listObj);
   	Private.createList(listObj)
@@ -32,7 +47,7 @@ angular.module('foodBuddy.private', [])
 
   $scope.removeList = function(listName) {
   	var listObj = {};
-  	listObj.username = $scope.user.username;
+  	listObj.username = User.get();
   	listObj.name = listName;
 
   	Private.removeList(listObj)
@@ -50,7 +65,7 @@ angular.module('foodBuddy.private', [])
   $scope.retriveListItems = function() {
     var itemObj = {};
 
-    itemObj.username = $scope.user.username;
+    itemObj.username = User.get();
     itemObj.listName = CurrentList.get();
 
     console.log('item to retrive:', itemObj);
@@ -59,26 +74,33 @@ angular.module('foodBuddy.private', [])
       $scope.allListItems = data;
       $scope.getTotalPrice(data);
     })
+    .catch(function(err){
+      throw err;
+    })
   }
 
   $scope.addListItem = function(itemName) {
     var itemObj = {};
 
-    itemObj.username = $scope.user.username;
+    itemObj.username = User.get();
     itemObj.listName = CurrentList.get();
     itemObj.itemName = itemName;
 
-    // console.log('item to add:', itemObj);
+    console.log('item to add:', itemObj);
     Private.addItemToList(itemObj)
     .then(function(resp){
-      console.log(resp);
+      $scope.error = true;
       $scope.retriveListItems();
+    })
+    .catch(function(err){
+      $scope.error = false;
+      $scope.errorMessage = err.data.error;
     })
   }
 
   $scope.removeListItem = function(itemName) {
     var itemObj = {};
-    itemObj.username = $scope.user.username;
+    itemObj.username = User.get();
     itemObj.listName = CurrentList.get();
     itemObj.itemName = itemName;
 

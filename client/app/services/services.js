@@ -46,7 +46,8 @@ angular.module('foodBuddy.services',[])
     }).then(function(resp) {
       return resp.data;
     }).catch(function(err) {
-      console.log(err);
+      console.log(err.data.error);
+      throw err;
     })
   };
 
@@ -57,15 +58,18 @@ angular.module('foodBuddy.services',[])
 })
 
 .factory('Private', function($http, User) {
-  var retriveAllLists = function(user) {
+  var retriveAllLists = function(username) {
     // console.log('this is user:',user);
     return $http({
       method: 'GET',
       url: '/lists',
-      params: {username: user.username}
+      params: {username: username}
     }).then(function(resp) {
       return resp.data;
-    });
+    }).catch(function(err) {
+      console.log(err.data.error);
+      throw err;
+    })
   }
 
   var createList = function(newList) {
@@ -111,7 +115,9 @@ angular.module('foodBuddy.services',[])
     }).then(function(resp) {
       console.log('data sent');
       return resp;
-    });
+    }).catch(function(err){
+      throw err;
+    })
   }
 
   var removeItemFromList = function(item) {
@@ -170,11 +176,13 @@ angular.module('foodBuddy.services',[])
   };
 
   var isAuth = function() {
-    return !!$window.localstorage.getItem('foodBuddy');
+    // console.log($window.localStorage.getItem('foodBuddy'))
+    return !!$window.localStorage.getItem('foodBuddy');
   };
 
   var signOut = function() {
-    $window.localstorage.removeItem('foodBuddy');
+    // console.log('asdfasdf')
+    $window.localStorage.removeItem('foodBuddy');
     $location.path('/signin')
   };
 

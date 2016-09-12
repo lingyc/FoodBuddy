@@ -32,6 +32,6 @@ angular.module('foodBuddy.auth', [])
 	};
 
 	$scope.logout = function() {
-		Auth.signout();
+		Auth.signOut();
 	}
 })

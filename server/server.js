@@ -5,11 +5,10 @@ var itemController = require('./items/itemController');
 var userController = require('./users/userController');
 var listController = require('./lists/listController');
 var listItemController = require('./listItems/listItemController');
-var ip = '127.0.0.1';
 var port = 8000;
 
 var app = express();
-mongoose.connect('mongodb://127.0.0.1/foodBuddy');
+mongoose.connect('mongodb://foodBuddy:foodBuddy@ec2-54-68-219-27.us-west-2.compute.amazonaws.com:27017/foodBuddy');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -31,4 +30,4 @@ app.get('/list_items', listItemController.retriveListItems);
 
 
 app.listen(port);
-console.log('Listening on http://' + ip + ':' + port);
+console.log('Listening on port ', port);

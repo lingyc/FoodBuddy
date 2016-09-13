@@ -9,7 +9,7 @@ var ip = '127.0.0.1';
 var port = 8000;
 
 var app = express();
-mongoose.connect('mongodb://localhost/foodBuddy');
+mongoose.connect('mongodb://127.0.0.1/foodBuddy');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());

@@ -29,6 +29,9 @@ node_modules/
 bower_components/
 client/lib/
 
+#keys
+resources/
+
 # Floobits
 .floo
 .floobit
